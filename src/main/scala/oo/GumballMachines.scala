@@ -22,6 +22,9 @@ class NoCoin extends State{
   }
 
   override def turnCrank(machine: Machine): Unit = println("You turned, buy there is no coin!")
+
+
+  override def toString = s"NoCoin"
 }
 
 class HasCoin extends State {
@@ -37,6 +40,9 @@ class HasCoin extends State {
     if(winning) machine.currentState = Machine.winningState
     else machine.currentState = Machine.soldState
   }
+
+
+  override def toString = s"HasCoin"
 }
 
 class Sold extends State {
@@ -49,12 +55,18 @@ class Sold extends State {
     if(machine.gumballs > 0) machine.currentState = Machine.noCoinState
     else  machine.currentState = Machine.soldOutState
   }
+
+
+  override def toString = s"Sold"
 }
 
 class SoldOut extends State {
   override def insertCoin(machine: Machine): Unit = println("The machine is sold out!")
 
   override def turnCrank(machine: Machine): Unit = println("There is no gumballs.")
+
+
+  override def toString = s"SoldOut"
 }
 
 class Winning extends State {
@@ -71,6 +83,9 @@ class Winning extends State {
       else  machine.currentState = Machine.soldOutState
     }
   }
+
+
+  override def toString = s"Winning"
 }
 
 object Machine {
@@ -106,7 +121,7 @@ class GumballMachine(initialGumballs: Int) extends Machine {
   override var gumballs: Int = initialGumballs
   override var currentState: State = Machine.initState()
 
-  override def toString = s"GumballMachine($gumballs, $currentState)"
+  override def toString = s"GumballMachine(gumballs=$gumballs, state=$currentState)"
 }
 
 object GumballMachines extends App{
